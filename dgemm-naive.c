@@ -19,7 +19,7 @@ void square_dgemm(int n, double* A, double* B, double* C) {
             __m256d c0 = {0,0,0,0};
 //            double cij = C[i + j * n];
             for (int k = 0; k < n; k++) {
-                c0 = _m256_add_pd(
+                c0 = _mm256_add_pd(
                         c0,
                         _mm256_mul_pd(
                                 _mm256_load_pd(A+i+k*n),
