@@ -24,7 +24,8 @@ void square_dgemm(int n, double* A, double* B, double* C) {
 //                                _mm256_load_pd(A+i+k*n),
                                 _mm256_load_pd(&A[i+k*n]),
 //                                _mm256_broadcast_sd(B+k+j*n)));
-                                _mm256_broadcast_sd(&B[k+j*n])));
+//                                _mm256_broadcast_sd(&B[k+j*n])));
+                                _mm256_load_pd(&B[k+j*n])));
 //                cij += A[i + k * n] * B[k + j * n];
             }
 //            _mm256_store_pd(C+i+j*n, c0);
