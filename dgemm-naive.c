@@ -16,7 +16,7 @@ void square_dgemm(int n, double* A, double* B, double* C) {
     for (int i = 0; i < n; i+=4) {
         // For each column j of B
         for (int j = 0; j < n; j++) {
-            _m256d c0 = {0,0,0,0};
+            __m256d c0 = {0,0,0,0};
 //            double cij = C[i + j * n];
             for (int k = 0; k < n; k++) {
                 c0 = _m256_add_pd(
