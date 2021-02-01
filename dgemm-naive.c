@@ -1,5 +1,4 @@
 
-// AVX SIMD intrinsics
 #include <immintrin.h>
 
 const char* dgemm_desc = "SIMD dgemm.";
@@ -22,14 +21,14 @@ void square_dgemm(int n, double* A, double* B, double* C) {
                         c0,
                         _mm256_mul_pd(
 //                                _mm256_load_pd(A+i+k*n),
-                                _mm256_load_pd(&A[i+k*n]),
+                                _mm256_loadu_pd(&A[i+k*n]),
 //                                _mm256_broadcast_sd(B+k+j*n)));
 //                                _mm256_broadcast_sd(&B[k+j*n])));
-                                _mm256_load_pd(&B[k+j*n])));
+                                _mm256_loadu_pd(&B[k+j*n])));
 //                cij += A[i + k * n] * B[k + j * n];
             }
 //            _mm256_store_pd(C+i+j*n, c0);
-            _mm256_store_pd(&C[i+j*n], c0);
+            _mm256_storeu_pd(&C[i+j*n], c0);
 //            C[i + j * n] = cij;
         }
     }
