@@ -124,7 +124,7 @@ static void square_dgemm(const int n, double *left, double *right, double *resul
                     __m256d sum7 = _mm256_load_pd(result + i * n + j + 48);
                     __m256d sum8 = _mm256_load_pd(result + i * n + j + 56);
                     for (int k = row_offset; k < row_offset + block_height && k < n; ++k) {
-                        __m256d multiplier = _mm256_set1_ps(left[i * n + k]);
+                        __m256d multiplier = _mm256_set1_pd(left[i * n + k]);
                         sum1 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j), sum1);
                         sum2 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j + 8), sum2);
                         sum3 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j + 16), sum3);
