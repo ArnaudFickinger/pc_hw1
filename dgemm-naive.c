@@ -42,7 +42,7 @@ const char *dgemm_desc = "SIMD dgemm.";
 //    for (int i = 0; i < n; ++i) {
 //        int kn = 0;
 //        for (int k = 0; k < n; ++k) {
-//            __m256 aik = _mm256_set1_ps(left[in + k]);
+//            __m256d aik = _mm256_set1_ps(left[in + k]);
 //            int j = 0;
 //            for (; j < n; j += 8) {
 //                _mm256_store_pd(result + in + j,
@@ -115,16 +115,16 @@ static void square_dgemm(const int n, double *left, double *right, double *resul
         for (int row_offset = 0; row_offset < n; row_offset += block_height) {
             for (int i = 0; i < n; ++i) {
                 for (int j = column_offset; j < column_offset + block_width && j < n; j += 64) {
-                    __m256 sum1 = _mm256_load_pd(result + i * n + j);
-                    __m256 sum2 = _mm256_load_pd(result + i * n + j + 8);
-                    __m256 sum3 = _mm256_load_pd(result + i * n + j + 16);
-                    __m256 sum4 = _mm256_load_pd(result + i * n + j + 24);
-                    __m256 sum5 = _mm256_load_pd(result + i * n + j + 32);
-                    __m256 sum6 = _mm256_load_pd(result + i * n + j + 40);
-                    __m256 sum7 = _mm256_load_pd(result + i * n + j + 48);
-                    __m256 sum8 = _mm256_load_pd(result + i * n + j + 56);
+                    __m256d sum1 = _mm256_load_pd(result + i * n + j);
+                    __m256d sum2 = _mm256_load_pd(result + i * n + j + 8);
+                    __m256d sum3 = _mm256_load_pd(result + i * n + j + 16);
+                    __m256d sum4 = _mm256_load_pd(result + i * n + j + 24);
+                    __m256d sum5 = _mm256_load_pd(result + i * n + j + 32);
+                    __m256d sum6 = _mm256_load_pd(result + i * n + j + 40);
+                    __m256d sum7 = _mm256_load_pd(result + i * n + j + 48);
+                    __m256d sum8 = _mm256_load_pd(result + i * n + j + 56);
                     for (int k = row_offset; k < row_offset + block_height && k < n; ++k) {
-                        __m256 multiplier = _mm256_set1_ps(left[i * n + k]);
+                        __m256d multiplier = _mm256_set1_ps(left[i * n + k]);
                         sum1 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j), sum1);
                         sum2 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j + 8), sum2);
                         sum3 = _mm256_fmadd_pd(multiplier, _mm256_load_pd(right + k * n + j + 16), sum3);
