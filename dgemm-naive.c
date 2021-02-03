@@ -148,7 +148,7 @@ void square_dgemm(int n, double *right, double *left, double *result) {
 //                    for (int k = row_offset; k < row_offset + block_height && k < n; ++k) {
 //                        result[j + i * n] += left[k + i * n] * right[j + k * n];
 //                    }
-                }
+//                }
             }
         }
     }
