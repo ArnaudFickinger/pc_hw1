@@ -108,7 +108,7 @@ const char *dgemm_desc = "SIMD dgemm.";
 //        }
 //    }
 
-static void square_dgemm(const int n, double *left, double *right, double *result) {
+void square_dgemm(int n, double *left, double *right, double *result) {
     const int block_width = n >= 256 ? 512 : 256;
     const int block_height = n >= 512 ? 8 : n >= 256 ? 16 : 32;
     for (int column_offset = 0; column_offset < n; column_offset += block_width) {
