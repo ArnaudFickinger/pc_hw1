@@ -108,7 +108,7 @@ const char *dgemm_desc = "SIMD dgemm.";
 //        }
 //    }
 
-void square_dgemm(int n, double *left, double *right, double *result) {
+void square_dgemm(int n, double *right, double *left, double *result) {
     const int block_width = n >= 256 ? 512 : 256;
     const int block_height = n >= 512 ? 8 : n >= 256 ? 16 : 32;
     for (int column_offset = 0; column_offset < n; column_offset += block_width) {
@@ -144,10 +144,10 @@ void square_dgemm(int n, double *left, double *right, double *result) {
                     _mm512_storeu_pd(result + i * n + j + 48, sum7);
                     _mm512_storeu_pd(result + i * n + j + 56, sum8);
                 }
-                for (; j < n; j++) {
-                    for (int k = row_offset; k < row_offset + block_height && k < n; ++k) {
-                        result[j + i * n] += left[k + i * n] * right[j + k * n];
-                    }
+//                for (; j < n; j++) {
+//                    for (int k = row_offset; k < row_offset + block_height && k < n; ++k) {
+//                        result[j + i * n] += left[k + i * n] * right[j + k * n];
+//                    }
                 }
             }
         }
