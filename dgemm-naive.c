@@ -114,7 +114,7 @@ void square_dgemm(int n, double *left, double *right, double *result) {
     for (int column_offset = 0; column_offset < n; column_offset += block_width) {
         for (int row_offset = 0; row_offset < n; row_offset += block_height) {
             for (int i = 0; i < n; ++i) {
-                int j = column_offset
+                int j = column_offset;
                 for (; j < column_offset + block_width && j < n; j += 64) {
                     __m512d sum1 = _mm512_loadu_pd(result + i * n + j);
                     __m512d sum2 = _mm512_loadu_pd(result + i * n + j + 8);
