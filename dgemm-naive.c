@@ -100,7 +100,7 @@ void square_dgemm(int n, double *A, double *B, double *C) {
             for (; i < n - 8; i += 8) {
                 _mm512_storeu_pd(&C[i + j * n], _mm512_fmadd_pd(_mm512_loadu_pd(&A[i + k * n]), bkj,
                                                                 _mm512_loadu_pd(&C[i + j * n])));
-//            }            //remaining elements
+            }            //remaining elements
                 for (; i < n; i++) {
                     C[i + j * n] += A[i + k * n] * B[k + j * n];
                 }
